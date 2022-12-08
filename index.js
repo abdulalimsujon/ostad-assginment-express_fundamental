@@ -2,10 +2,15 @@
 
 
 var express = require('express');
+const res = require('express/lib/response');
 var multer = require('multer');
+
 const path = require("path");
 
 const app = express();
+
+
+app.use(express.static('public'));
 
 
 
@@ -74,9 +79,6 @@ var upload = multer({
 
         } else {
             callback(new Error('Only jpg and png images are allowed'))
-
-
-
         }
 
 
@@ -96,6 +98,15 @@ app.post('/uploadfile', function (req, res) {
 
 
 })
+
+// post multipart data 
+
+app.post('/multipart', (req, res) => {
+    const body = req.body;
+    res.send(JSON.stringify(body))
+})
+
+
 
 app.listen(8000, function () {
     console.log('app is running on port ', 8000);
